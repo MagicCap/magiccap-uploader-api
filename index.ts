@@ -149,9 +149,20 @@ export class UploadersAPIV1 {
         if (!res.ok) throw new Error(json.message)
     }
 
-    async expressRoute(req: any, res: any) {
-        this._throwMisconfiguredServer()
+    static async clientFromExpressHandler(uploaderSlug: string, routePath: string) {
+        const client = UploadersAPIV1.client(uploaderSlug, undefined)
+        const swapToken = await client.requestSwapToken()
+        const res = await fetch(`${routePath}?swap_token=${swapToken}`)
+        if (!res.ok) throw new Error((await res.json()).message)
+        client.setClientToken((await res.json()).clientToken)
+        return client
+    }
+}
 
+export function expressWrapper(uploaderSlug: string, uploaderToken: string) {
+    const server = UploadersAPIV1.server(uploaderSlug, uploaderToken)
+
+    return async(req: any, res: any) => {        
         const swapToken = req.query.swap_token
         if (!swapToken) {
             res.status(400)
@@ -162,7 +173,7 @@ export class UploadersAPIV1 {
             return
         }
         try {
-            const clientTokenResult = await this.getClientToken(swapToken)
+            const clientTokenResult = await server.getClientToken(swapToken)
             res.json(clientTokenResult)
         } catch (e) {
             res.status(400)
@@ -170,14 +181,5 @@ export class UploadersAPIV1 {
                 message: e.message,
             })
         }
-    }
-
-    static async clientFromExpressHandler(uploaderSlug: string, routePath: string) {
-        const client = UploadersAPIV1.client(uploaderSlug, undefined)
-        const swapToken = await client.requestSwapToken()
-        const res = await fetch(`${routePath}?swap_token=${swapToken}`)
-        if (!res.ok) throw new Error((await res.json()).message)
-        client.setClientToken((await res.json()).clientToken)
-        return client
     }
 }

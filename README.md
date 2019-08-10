@@ -15,9 +15,9 @@ For usage, you will need a uploader token and the name of your uploader slug. If
 
 The Express handler hides away a lot of the complicated parts. Simply insert some code on your server side like this:
 ```ts
-import { UploadersAPIV1 } from "magiccap-uploader-api"
+import { expressWrapper } from "magiccap-uploader-api"
 
-<express server>.get("/magiccap-uploader-verify", UploadersAPIV1.server("uploader slug here", "uploader token here").expressRoute)
+<express server>.get("/magiccap-uploader-verify", expressWrapper("uploader slug here", "uploader token here"))
 ```
 
 From here, on the client-side to make a API client you can just do this:
