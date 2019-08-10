@@ -148,4 +148,36 @@ export class UploadersAPIV1 {
         const json = await res.json()
         if (!res.ok) throw new Error(json.message)
     }
+
+    async expressRoute(req: any, res: any) {
+        this._throwMisconfiguredServer()
+
+        const swapToken = req.query.swap_token
+        if (!swapToken) {
+            res.status(400)
+            res.json({
+                success: false,
+                message: "Missing swap token.",
+            })
+            return
+        }
+        try {
+            const clientTokenResult = await this.getClientToken(swapToken)
+            res.json(clientTokenResult)
+        } catch (e) {
+            res.status(400)
+            res.json({
+                message: e.message,
+            })
+        }
+    }
+
+    static async clientFromExpressHandler(uploaderSlug: string, routePath: string) {
+        const client = UploadersAPIV1.client(uploaderSlug, undefined)
+        const swapToken = await client.requestSwapToken()
+        const res = await fetch(`${routePath}?swap_token=${swapToken}`)
+        if (!res.ok) throw new Error((await res.json()).message)
+        client.setClientToken((await res.json()).clientToken)
+        return client
+    }
 }

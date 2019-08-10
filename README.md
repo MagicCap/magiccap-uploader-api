@@ -8,6 +8,27 @@ A minified copy of this API is avaliable as https://s3.magiccap.me/uploader_api.
 For usage, you will need a uploader token and the name of your uploader slug. If you have an uploader in MagicCap, DM `JakeMakesStuff#0001` on Discord for this.
 
 ## Authorization
+
+### Using the Express handler (Suggested)
+
+**IF YOU USE CORS MIDDLEWARE, DISABLE IT FOR THIS ROUTE!**
+
+The Express handler hides away a lot of the complicated parts. Simply insert some code on your server side like this:
+```ts
+import { UploadersAPIV1 } from "magiccap-uploader-api"
+
+<express server>.get("/magiccap-uploader-verify", UploadersAPIV1.server("uploader slug here", "uploader token here").expressRoute)
+```
+
+From here, on the client-side to make a API client you can just do this:
+```ts
+import { UploadersAPIV1 } from "magiccap-uploader-api"
+
+const client = UploadersAPIV1.clientFromExpressHandler("uploader slug here", "/magiccap-uploader-verify")
+```
+
+### Manual Authentication
+
 Authorization uses this library on both the client-side and server-side. Firstly, import the library on both your server-side Node/the browser. This can be done using imports:
 ```ts
 import { UploadersAPIV1 } from "magiccap-uploader-api"
