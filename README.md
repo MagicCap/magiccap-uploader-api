@@ -26,7 +26,7 @@ const server = UploadersAPIV1.server("uploader slug here", "uploader token here"
 const getClientTokenInfo = async (swapToken: string) => {
     let clientTokenInfo
     try {
-        clientTokenInfo = server.getClientToken(swapToken)
+        clientTokenInfo = await server.getClientToken(swapToken)
     } catch (e) {
         // Something went wrong. Catch the error and inform the user with a error message.
     }
