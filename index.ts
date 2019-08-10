@@ -44,7 +44,7 @@ export class UploadersAPIV1 {
     }
 
     private _throwMisconfiguredClient() {
-        if (!this.clientToken) throw new Error("This class is configured as a server or does not have a token set. To do client actions, you need to have a class configured as a client and you need to turn your swap token into a client toke. You can then run .setClientToken(<token>) on here or reconstruct the class with the client token.")
+        if (!this.clientToken) throw new Error("This class is configured as a server or does not have a token set. To do client actions, you need to have a class configured as a client and you need to turn your swap token into a client token. You can then run .setClientToken(<token>) on here or reconstruct the class with the client token.")
     }
 
     private _throwMisconfiguredServer() {

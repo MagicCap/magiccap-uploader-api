@@ -1,6 +1,9 @@
 # MagicCap Uploader API (Node/Browser)
 This API handles the client/server-side elements of the MagicCap uploader API.
 
+## Minified API
+A minified copy of this API is avaliable as https://s3.magiccap.me/uploader_api.min.js. Note this API has everything in the MagicCap namespace, so for all examples here, you would need to add `MagicCap.` at the beginning.
+
 ## Usage
 For usage, you will need a uploader token and the name of your uploader slug. If you have an uploader in MagicCap, DM `JakeMakesStuff#0001` on Discord for this.
 

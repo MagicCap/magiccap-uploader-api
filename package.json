@@ -1,6 +1,6 @@
 {
   "name": "magiccap-uploader-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node/browser version of the MagicCap uploader API.",
   "main": "index.js",
   "repository": {
@@ -22,9 +22,15 @@
     "node-fetch": "^2.6.0",
     "typescript": "^3.5.3"
   },
+  "devDependencies": {
+    "expose-loader": "^0.7.5",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
   "scripts": {
     "build": "tsc --declaration true --declarationMap true",
-    "prepack": "npm run build",
-    "postinstall": "npm run build"
+    "prepack": "npm run build && npm run create-min",
+    "postinstall": "npm run build && npm run create-min",
+    "create-min": "webpack"
   }
 }
