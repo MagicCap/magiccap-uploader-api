@@ -24,7 +24,7 @@ From here, on the client-side to make a API client you can just do this:
 ```ts
 import { UploadersAPIV1 } from "magiccap-uploader-api"
 
-const client = UploadersAPIV1.clientFromExpressHandler("uploader slug here", "/magiccap-uploader-verify")
+const client = await UploadersAPIV1.clientFromExpressHandler("uploader slug here", "/magiccap-uploader-verify")
 ```
 
 ### Manual Authentication
