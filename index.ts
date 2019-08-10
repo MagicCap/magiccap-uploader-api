@@ -151,8 +151,8 @@ export class UploadersAPIV1 {
 
     static async clientFromExpressHandler(uploaderSlug: string, routePath: string) {
         const client = UploadersAPIV1.client(uploaderSlug, undefined)
-        const swapToken = await client.requestSwapToken()
-        const res = await fetch(`${routePath}?swap_token=${swapToken}`)
+        const swapTokenInfo = await client.requestSwapToken()
+        const res = await fetch(`${routePath}?swap_token=${swapTokenInfo.swapToken}`)
         if (!res.ok) throw new Error((await res.json()).message)
         client.setClientToken((await res.json()).clientToken)
         return client

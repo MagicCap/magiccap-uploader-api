@@ -1,6 +1,6 @@
 {
   "name": "magiccap-uploader-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Node/browser version of the MagicCap uploader API.",
   "main": "index.js",
   "repository": {
