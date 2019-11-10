@@ -56,7 +56,7 @@ export class UploadersAPIV1 {
 
         let res
         try {
-            res = await fetch(url)
+            res = await fetch(url, {method: "GET"})
         } catch (_) {
             throw new Error("MagicCap is not open.")
         }
@@ -75,7 +75,7 @@ export class UploadersAPIV1 {
 
         const url = `https://api.magiccap.me/swap_tokens/swap/${encodeURIComponent(swapToken)}/${encodeURIComponent(this.uploaderToken!)}/${encodeURIComponent(this.uploaderSlug)}`
 
-        const res = await fetch(url)
+        const res = await fetch(url, {method: "GET"})
         const json = await res.json()
         if (!res.ok) throw new Error(json.message)
 
@@ -94,6 +94,7 @@ export class UploadersAPIV1 {
             headers: {
                 Authorization: `Bearer ${this.clientToken}`,
             },
+            method: "GET",
         })
         const json = await res.json()
         if (!res.ok) throw new Error(json.message)
@@ -110,6 +111,7 @@ export class UploadersAPIV1 {
             headers: {
                 Authorization: `Bearer ${this.clientToken}`,
             },
+            method: "GET",
         })
         const json = await res.json()
         if (!res.ok) throw new Error(json.message)
@@ -124,6 +126,7 @@ export class UploadersAPIV1 {
             headers: {
                 Authorization: `Bearer ${this.clientToken}`,
             },
+            method: "GET",
         })
         const json = await res.json()
         if (!res.ok) throw new Error(json.message)
@@ -144,6 +147,7 @@ export class UploadersAPIV1 {
             headers: {
                 Authorization: `Bearer ${this.clientToken}`,
             },
+            method: "GET",
         })
         const json = await res.json()
         if (!res.ok) throw new Error(json.message)
