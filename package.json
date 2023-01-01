@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "expose-loader": "^0.7.5",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "scripts": {
     "build": "tsc --declaration true --declarationMap true",
